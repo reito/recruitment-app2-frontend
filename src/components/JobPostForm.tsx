@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Header from './Header';
 
 type JobPostFormProps = {
   onPostJob: (job: { title: string; category: string; salary: number }) => void;
@@ -18,7 +19,9 @@ const JobPostForm: React.FC<JobPostFormProps> = ({ onPostJob }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 bg-white shadow-md rounded">
+    <div>
+      <Header />
+      <form onSubmit={handleSubmit} className="p-4 bg-white shadow-md rounded">
       <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2">求人タイトル</label>
         <input
@@ -53,6 +56,7 @@ const JobPostForm: React.FC<JobPostFormProps> = ({ onPostJob }) => {
         投稿
       </button>
     </form>
+    </div>
   );
 };
 

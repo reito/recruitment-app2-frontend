@@ -39,7 +39,7 @@ const JobPostForm: React.FC<JobPostFormProps> = ({ onPostJob }) => {
 
       {error && <p className="text-red-500">{error}</p>}
       
-      <div className="mb-4">
+      <div className="mb-4 w-1/3">
         <label className="block text-gray-700 text-sm font-bold mb-2">求人カテゴリを選択</label>
      
         <select value={category} onChange={(e) => setCategory(e.target.value)} className="w-full p-2 border">
@@ -53,7 +53,7 @@ const JobPostForm: React.FC<JobPostFormProps> = ({ onPostJob }) => {
       </select>
       </div>
 
-      <div className="mb-4">
+      <div className="mb-4 w-1/3">
         <label className="block text-gray-700 text-sm font-bold mb-2">年収 (万円)</label>
         <input
           type="number"
@@ -73,7 +73,7 @@ const JobPostForm: React.FC<JobPostFormProps> = ({ onPostJob }) => {
         />
       </div>
 
-      <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded">
+      <button type="submit" className="p-2 bg-blue-500 text-white rounded w-1/3">
         投稿
       </button>
     </form>

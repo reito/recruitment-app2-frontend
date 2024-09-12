@@ -9,24 +9,26 @@ type JobPostFormProps = {
 const JobPostForm: React.FC<JobPostFormProps> = ({ onPostJob }) => {
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
-  const [salary, setSalary] = useState(0);
+  const [salary, setSalary] = useState<string>('');
 
   const [error, setError] = useState<string>('');
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const salaryValue = Number(salary);
     
-    if (!title || !category || salary <= 0) {
+    if (!title || !category || salaryValue <= 0) {
       setError('すべてのフィールドを正しく入力してください。');
       return; // 送信を中断
     }
 
     // エラーがなければ投稿処理を続行
-    onPostJob({ title, category, salary });
+    onPostJob({ title, category, salary: salaryValue });
     setTitle('');
     setCategory('');
-    setSalary(0);
+    setSalary('');
     setError(''); // エラーをクリア
     navigate('/');
   };
@@ -58,7 +60,7 @@ const JobPostForm: React.FC<JobPostFormProps> = ({ onPostJob }) => {
         <input
           type="number"
           value={salary}
-          onChange={(e) => setSalary(Number(e.target.value))}
+          onChange={(e) => setSalary(e.target.value)}
           className="w-full p-2 border rounded"
         />
       </div>

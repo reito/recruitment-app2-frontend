@@ -42,7 +42,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onFilterChange }) => {
   };
 
   return (
-    <div className="p-1">
+    <div className="p-1 bg-gray-200">
       <aside className="w-full p-4">
         <h2 className="font-bold mb-4">求人カテゴリ</h2>
         {categories.map((category) => (

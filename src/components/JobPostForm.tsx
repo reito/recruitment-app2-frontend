@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Header from './Header';
+import {Link} from "react-router-dom";
 
 type JobPostFormProps = {
   onPostJob: (job: { title: string; category: string; salary: number }) => void;
@@ -63,11 +64,12 @@ const JobPostForm: React.FC<JobPostFormProps> = ({ onPostJob }) => {
       </div>
 
       <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded">
-        投稿
+        <Link to="/">投稿</Link>
       </button>
     </form>
     </div>
   );
+
 };
 
 export default JobPostForm;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Header from './Header';
-import {Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 type JobPostFormProps = {
   onPostJob: (job: { title: string; category: string; salary: number }) => void;
@@ -11,12 +11,15 @@ const JobPostForm: React.FC<JobPostFormProps> = ({ onPostJob }) => {
   const [category, setCategory] = useState('');
   const [salary, setSalary] = useState(0);
 
+  const navigate = useNavigate();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onPostJob({ title, category, salary });
     setTitle('');
     setCategory('');
     setSalary(0);
+    navigate('/');
   };
 
   return (
@@ -64,7 +67,7 @@ const JobPostForm: React.FC<JobPostFormProps> = ({ onPostJob }) => {
       </div>
 
       <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded">
-        <Link to="/">投稿</Link>
+        投稿
       </button>
     </form>
     </div>

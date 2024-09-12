@@ -11,22 +11,34 @@ const JobPostForm: React.FC<JobPostFormProps> = ({ onPostJob }) => {
   const [category, setCategory] = useState('');
   const [salary, setSalary] = useState(0);
 
+  const [error, setError] = useState<string>('');
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!title || !category || salary <= 0) {
+      setError('すべてのフィールドを正しく入力してください。');
+      return; // 送信を中断
+    }
+
+    // エラーがなければ投稿処理を続行
     onPostJob({ title, category, salary });
     setTitle('');
     setCategory('');
     setSalary(0);
+    setError(''); // エラーをクリア
     navigate('/');
   };
+  
 
   return (
     <div>
       <Header />
       <form onSubmit={handleSubmit} className="p-4 bg-white shadow-md rounded">
 
+      {error && <p className="text-red-500">{error}</p>}
+      
       <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2">求人カテゴリを選択</label>
         {/* <input

@@ -41,12 +41,7 @@ const JobPostForm: React.FC<JobPostFormProps> = ({ onPostJob }) => {
       
       <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2">求人カテゴリを選択</label>
-        {/* <input
-          type="text"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          className="w-full p-2 border rounded"
-        /> */}
+     
         <select value={category} onChange={(e) => setCategory(e.target.value)} className="w-full p-2 border">
         <option value={0}>カテゴリを選択</option>
         <option value={'エンジニア'}>エンジニア</option>

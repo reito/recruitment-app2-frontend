@@ -6,17 +6,11 @@ type SidebarProps = {
 
 const Sidebar: React.FC<SidebarProps> = ({ onFilterChange }) => {
    
-  // const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
   const [selectedSalary, setSelectedSalary] = useState(0);
 
   const categories = ['エンジニア', 'デザイン', 'マーケティング', '人事', '財務・経理', '医療・介護'];  
 
-  // const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   const category = e.target.value;
-  //   setSelectedCategory(category);
-  //   onFilterChange(category, selectedSalary);
-  // };
   const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const category = e.target.value;
     if (e.target.checked) {
@@ -26,7 +20,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onFilterChange }) => {
         prevCategories.filter((c) => c !== category)
       );
     }
-    // onFilterChange(selectedCategory, selectedSalary);  // フィルター変更イベントを呼び出す
+
     onFilterChange(
       e.target.checked
         ? [...selectedCategory, category] // チェックが入っている場合は新しいカテゴリを追加

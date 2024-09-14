@@ -3,4 +3,4 @@
 〜技術スタック〜
 ・React / TypeScript
 ・Tailwind CSS
-・Vercel
+・Vercel# recruitment-app2-frontend

@@ -4,4 +4,3 @@
 ・React / TypeScript
 ・Tailwind CSS
 ・Vercel# recruitment-app2-frontend
-テスト

@@ -1,11 +1,38 @@
 import React, { useState } from 'react';
 import Header from './Header';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { createJob } from '../api';
 
 type JobPostFormProps = {
   onPostJob: (job: { title: string; category: string; salary: number }) => void;
 };
 
+// const JobPostForm: React.FC<JobPostFormProps> = ({ onPostJob }) => {
+//   const [title, setTitle] = useState('');
+//   const [category, setCategory] = useState('');
+//   const [salary, setSalary] = useState<string>('');
+
+//   const [error, setError] = useState<string>('');
+//   const navigate = useNavigate();
+
+//   const handleSubmit = (e: React.FormEvent) => {
+//     e.preventDefault();
+
+//     const salaryValue = Number(salary);
+    
+//     if (!title || !category || salaryValue <= 0) {
+//       setError('すべてのフィールドを正しく入力してください。');
+//       return; // 送信を中断
+//     }
+
+//     // エラーがなければ投稿処理を続行
+//     onPostJob({ title, category, salary: salaryValue });
+//     setTitle('');
+//     setCategory('');
+//     setSalary('');
+//     setError(''); // エラーをクリア
+//     navigate('/'); //ホーム画面に戻る
+//   };
 const JobPostForm: React.FC<JobPostFormProps> = ({ onPostJob }) => {
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
@@ -14,8 +41,14 @@ const JobPostForm: React.FC<JobPostFormProps> = ({ onPostJob }) => {
   const [error, setError] = useState<string>('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    await createJob({
+      title,
+      category,
+      salary,
+    });
 
     const salaryValue = Number(salary);
     
@@ -30,7 +63,7 @@ const JobPostForm: React.FC<JobPostFormProps> = ({ onPostJob }) => {
     setCategory('');
     setSalary('');
     setError(''); // エラーをクリア
-    navigate('/');
+    navigate('/'); //ホーム画面に戻る
   };
   
 

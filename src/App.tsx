@@ -5,14 +5,15 @@ import JobPostForm from './components/JobPostForm';
 // import NotFound from './pages/NotFound';
 import Header from './components/Header';
 import JobList from './components/JobList'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getJobs } from './api';
 
 
-const initialJobs = [
-  { id: 1, title: 'ソフトウェアエンジニア', category: 'エンジニア', salary: 500 },
-  { id: 2, title: 'デザイナー', category: 'デザイン', salary: 400 },
-  // 他の求人情報も追加可能
-];
+// const initialJobs = [
+//   { id: 1, title: 'ソフトウェアエンジニア', category: 'エンジニア', salary: 500 },
+//   { id: 2, title: 'デザイナー', category: 'デザイン', salary: 400 },
+//   // 他の求人情報も追加可能
+// ];
 
 interface Job {
   id: number;
@@ -24,6 +25,11 @@ interface Job {
 function HomePage({ jobs, onFilterChange }: { jobs: Job[]; onFilterChange: (selectedCategories: string[], selectedSalary: number) => void }) {
 
   const [filteredJobs, setFilteredJobs] = useState<Job[]>(jobs);
+
+  // jobsが更新されたらfilteredJobsも更新する
+  useEffect(() => {
+    setFilteredJobs(jobs);
+  }, [jobs]);
 
   // フィルタの変更処理
   const handleFilterChange = (selectedCategories: string[], selectedSalary: number) => {
@@ -48,7 +54,19 @@ function HomePage({ jobs, onFilterChange }: { jobs: Job[]; onFilterChange: (sele
 
 function App() {
 
-  const [jobs, setJobs] = useState<Job[]>(initialJobs);
+  const [jobs, setJobs] = useState<Job[]>([]);
+
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const jobsData = await getJobs();
+        setJobs(jobsData);
+      } catch (error) {
+        console.error('Error while fetching jobs:', error);
+      } 
+    };
+    fetchJobs();
+  }, []);
 
   const handleOnPostJob = (job: { title: string; category: string; salary: number })  => {
 
